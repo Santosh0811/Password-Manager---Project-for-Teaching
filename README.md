@@ -1,4 +1,4 @@
-📘 Password Manager – Full Stack Project
+📘 Password Manager – Full MERN Stack Project
 
 A simple and secure password manager built using React (Frontend) and Node.js + Express (Backend) with MongoDB for storing encrypted passwords.
 
