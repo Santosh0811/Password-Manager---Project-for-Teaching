@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -29,20 +28,3 @@ node_modules/
 dist/
 build/
 /index.html
-=======
-# Node
-node_modules/
-
-# Environment files
-.env
-backend/.env
-frontend/.env
-
-# Logs
-*.log
-
-# build files
-frontend/build/
-frontend/dist/
-backend/dist/
->>>>>>> 69657b3124f3c4f70010e6a925564937a59c1163
