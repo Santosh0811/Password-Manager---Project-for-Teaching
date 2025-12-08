@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react'
-import Table from './Table';
 
 const Form = () => {
     const [formData, setFormData] = useState({ emailId: "", password: "", websiteName: "" });
@@ -76,8 +75,6 @@ const Form = () => {
                 </div>
                 <button type="submit" className="text-white bg-gray-800 box-border border border-black rounded-2xl hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit</button>
             </form>
-
-            <Table BACKENDURL={BACKENDURL} />
         </div>
     )
 }

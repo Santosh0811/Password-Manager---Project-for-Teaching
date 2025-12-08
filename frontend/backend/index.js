@@ -45,22 +45,6 @@ app.post("/createForm", async (req, res) => {
   }
 })
 
-app.get('/readForm', async (req, res) => {
-  try {
-    const formReaddata = await form.find();
-
-    if (!formReaddata || formReaddata.length === 0) {
-      return res.status(400).json({ message: "No Password is saved" });
-    }
-
-    res.status(200).json({ formReaddata });
-
-  } catch (error) {
-    console.log("Error while fetching a password");
-    res.status(400).json({ message: "Error while fetching a password" })
-  }
-})
-
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
 })
