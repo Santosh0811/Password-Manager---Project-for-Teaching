@@ -10,7 +10,7 @@ frontend/.env
 *.log
 
 # build files
-frontend/build/
-frontend/dist/
-frontend/index.html/
-backend/dist/
+/frontend/build/
+/frontend/dist/
+/frontend/index.html/
+/backend/dist/
