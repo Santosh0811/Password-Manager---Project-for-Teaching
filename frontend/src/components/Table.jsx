@@ -3,29 +3,7 @@ import React from 'react'
 
 const Table = (props) => {
 
-    const { BACKENDURL } = props;
-
-    const [readData, setReadData] = useState([]);
-
-    const handleReadForm = async () => {
-        try {
-            const response = await fetch(`${BACKENDURL}/readForm`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" }
-            })
-
-            const data = await response.json();
-
-            if (response.ok) {
-                setReadData(data.formReaddata);
-            }
-            else {
-                console.log("Failed to fetch data");
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    const { setFormData, formData, handleReadForm, readData, setIsUpdate, setId } = props;
 
     useEffect(() => {
         handleReadForm();
@@ -71,8 +49,14 @@ const Table = (props) => {
                                         {item.password}
                                     </td>
                                     <td className="px-6 py-4 flex gap-5">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                        <i class="fa-solid fa-trash"></i>
+                                        <i className="fa-solid fa-pen-to-square"
+                                            onClick={() => {
+                                                setFormData({ ...formData, emailId: item.emailId, password: item.password, websiteName: item.websiteName });
+                                                setIsUpdate(true);
+                                                setId(item._id)
+                                            }}>
+                                        </i>
+                                        <i className="fa-solid fa-trash"></i>
                                     </td>
                                 </tr>
                             ))

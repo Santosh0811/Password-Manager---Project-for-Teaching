@@ -61,6 +61,36 @@ app.get('/readForm', async (req, res) => {
   }
 })
 
+app.put('/updateForm/:Id', async (req, res) => {
+  try {
+    const { Id } = req.params;
+
+    const isId = await form.findById(Id);
+
+    if (!isId) {
+      return res.status(404).json({ message: "Id not found" });
+    }
+
+    const { formData } = req.body;
+
+    if (!formData.emailId || !formData.password || !formData.websiteName) {
+      return res.status(400).json({ message: "Missing required fileds!" });
+    }
+
+    const updateFormData = await form.findByIdAndUpdate(Id, { emailId: formData.emailId, password: formData.password, websiteName: formData.websiteName });
+
+    if (!updateFormData) {
+      return res.status(400).json({ message: "Updating data failed" });
+    }
+
+    res.status(200).json({ message: "Updated Successfully" });
+
+  } catch (error) {
+    console.log("Error while updating a password");
+    res.status(400).json({ message: "Error while updating a password" })
+  }
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
 })
