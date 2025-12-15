@@ -91,6 +91,29 @@ app.put('/updateForm/:Id', async (req, res) => {
   }
 })
 
+app.delete('/deletePassword/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const isId = await form.findById(id);
+
+    if (!isId) {
+      return res.status(404).json({ message: "Id not found" });
+    }
+
+    const deletePassword = await form.findByIdAndDelete(id);
+
+    if (!deletePassword) {
+      return res.status(400).json({ message: "Password is not deleted" });
+    }
+
+    res.status(200).json({ message: "Password deleted successfully" });
+  } catch (error) {
+    console.log("Error while deleting a password");
+    res.status(400).json({ message: "Error while deleting a password" })
+  }
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
 })

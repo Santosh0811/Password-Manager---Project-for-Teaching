@@ -3,7 +3,7 @@ import React from 'react'
 
 const Table = (props) => {
 
-    const { setFormData, formData, handleReadForm, readData, setIsUpdate, setId } = props;
+    const { setFormData, formData, handleReadForm, readData, setIsUpdate, setId, handleDeleteForm } = props;
 
     useEffect(() => {
         handleReadForm();
@@ -53,10 +53,14 @@ const Table = (props) => {
                                             onClick={() => {
                                                 setFormData({ ...formData, emailId: item.emailId, password: item.password, websiteName: item.websiteName });
                                                 setIsUpdate(true);
-                                                setId(item._id)
+                                                setId(item._id);
                                             }}>
                                         </i>
-                                        <i className="fa-solid fa-trash"></i>
+                                        <i className="fa-solid fa-trash"
+                                            onClick={() => {
+                                                handleDeleteForm(item._id);
+                                            }}>
+                                        </i>
                                     </td>
                                 </tr>
                             ))

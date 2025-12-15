@@ -49,6 +49,7 @@ const Form = () => {
             }
             else {
                 console.log("Failed to fetch data");
+                setReadData([]);
             }
         } catch (error) {
             console.log(error);
@@ -71,7 +72,34 @@ const Form = () => {
                 await handleReadForm();
                 setFormData({ emailId: "", password: "", websiteName: "" });
             }
+            else{
+                console.log("Failed to update")
+            }
 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleDeleteForm = async (id) => {
+        if (!window.confirm("Are you want to delete this password")) {
+            return;
+        }
+        try {
+            const response = await fetch(`${BACKENDURL}/deletePassword/${id}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application.json" }
+            })
+
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log("Password Deleted successfully");
+                await handleReadForm();
+            }
+            else {
+                console.log("Failed to Delete Password");
+            }
         } catch (error) {
             console.log(error);
         }
@@ -134,7 +162,7 @@ const Form = () => {
 
             </form>
 
-            <Table BACKENDURL={BACKENDURL} setFormData={setFormData} formData={formData} handleReadForm={handleReadForm} readData={readData} setReadData={setReadData} setIsUpdate={setIsUpdate} setId={setId} />
+            <Table BACKENDURL={BACKENDURL} setFormData={setFormData} formData={formData} handleReadForm={handleReadForm} readData={readData} setReadData={setReadData} setIsUpdate={setIsUpdate} setId={setId} handleDeleteForm={handleDeleteForm} />
         </div>
     )
 }
