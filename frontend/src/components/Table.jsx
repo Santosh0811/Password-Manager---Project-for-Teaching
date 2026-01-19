@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import React from 'react'
+import PasswordContext from "../context/PasswordContext";
 
-const Table = (props) => {
+const Table = () => {
 
-    const { setFormData, formData, handleReadForm, readData, setIsUpdate, setId, handleDeleteForm } = props;
+    const { setFormData, formData, handleReadForm, readData, setIsUpdate, setId, handleDeleteForm } = useContext(PasswordContext);
 
     useEffect(() => {
         handleReadForm();

@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
 import Table from './Table';
+import PasswordContext from '../context/PasswordContext';
 
 const Form = () => {
     const [formData, setFormData] = useState({ emailId: "", password: "", websiteName: "" });
-    const [readData, setReadData] = useState([]);
     const [isUpdate, setIsUpdate] = useState(false);
     const [Id, setId] = useState("");
 
-    const BACKENDURL = "http://localhost:5000";
+    const { BACKENDURL, handleReadForm, } = useContext(PasswordContext);
 
     const handleSubmitForm = async () => {
         try {
@@ -35,26 +35,7 @@ const Form = () => {
         }
     }
 
-    const handleReadForm = async () => {
-        try {
-            const response = await fetch(`${BACKENDURL}/readForm`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" }
-            })
 
-            const data = await response.json();
-
-            if (response.ok) {
-                setReadData(data.formReaddata);
-            }
-            else {
-                console.log("Failed to fetch data");
-                setReadData([]);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     const handleUpdateForm = async () => {
         try {
@@ -72,7 +53,7 @@ const Form = () => {
                 await handleReadForm();
                 setFormData({ emailId: "", password: "", websiteName: "" });
             }
-            else{
+            else {
                 console.log("Failed to update")
             }
 
@@ -162,7 +143,7 @@ const Form = () => {
 
             </form>
 
-            <Table BACKENDURL={BACKENDURL} setFormData={setFormData} formData={formData} handleReadForm={handleReadForm} readData={readData} setReadData={setReadData} setIsUpdate={setIsUpdate} setId={setId} handleDeleteForm={handleDeleteForm} />
+            <Table />
         </div>
     )
 }
